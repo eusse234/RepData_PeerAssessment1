@@ -1,5 +1,4 @@
 ---
-<<<<<<< HEAD
 title: 'Reproducible Research: Peer Assessment 1'
 author: "Schneider Eusse"
 output: html_document
@@ -37,6 +36,7 @@ hist(TotalSteps$steps,main="Histogram : Number of daily steps",xlab="Total steps
 meansteps <- mean(TotalSteps$steps, na.rm=TRUE)
 mediansteps <- median(TotalSteps$steps, na.rm=TRUE)
 ```
+
 The **mean** toal of steps taken per day is: **`r meansteps`**.
 
 The **median** total of steps taken per day is: **`r mediansteps`**.
@@ -46,18 +46,18 @@ What is the average daily activity pattern?
 ===========================================
 
 1. Time series plot of the 5-minute interval and the average number of steps taken averaged across all days:
-
 ```{r}
 StepsInt<-aggregate(steps~interval,data=Activity,mean,na.rm=TRUE)
 plot(steps~interval,data=StepsInt,type="l", main="Average Daily Activity Pattern")
 ```
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
-
 ```{r}
 MaxSteps <- StepsInt$interval[which.max(StepsInt$steps)]
 ```
+
 The 5-minute-interval with the maximum number of steps is: `r MaxSteps`
+
 
 Imputing missing values
 =======================
@@ -66,6 +66,7 @@ Imputing missing values
 ```{r}
 TotalMV <- sum(is.na(Activity))
 ```
+
 The Total number of **NA values** is: **`r TotalMV`**.
 
 2. Devise a strategy for filling in all of the missing values in the dataset.
@@ -73,7 +74,6 @@ The Total number of **NA values** is: **`r TotalMV`**.
 - My strategy will be to filling missing values of the original data with the mean for the 5-minute intervals.
 
 3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
-
 ```{r}
 ActivityFill <- merge(Activity, StepsInt, by="interval", suffixes=c("",".y"))
 nas <- is.na(ActivityFill$steps)
@@ -82,13 +82,13 @@ ActivityFill <- ActivityFill[,c(1:3)]
 ```
 
 4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day.
-
 ```{r, results="hide"}
 TotalSteps2<-aggregate(steps~date,data=ActivityFill,sum)
 hist(TotalSteps2$steps, main="Histogram : Number of daily steps",xlab="Total steps by day", ylab="Frequency (Days)")
 meansteps2 <- mean(TotalSteps$steps, na.rm=TRUE)
 mediansteps2 <- median(TotalSteps$steps, na.rm=TRUE)
 ```
+
 The **mean** toal of steps taken per day is: **`r meansteps2`**.
 
 The **median** total of steps taken per day is: **`r mediansteps2`**.
@@ -120,29 +120,3 @@ plot(steps~interval,data=weekends,type="l", main="Average Weekends Activity Patt
 ```
 
 There are significative difference between the averages weekdays and weekends activity patterns. The weekend pattern show high activity (steps) during aslmost all intervals. The weekdays pattern show a peak of activity in ~800 interval but the rest of the pattern show low activity.
-=======
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
-
-
-## Loading and preprocessing the data
-
-
-
-## What is mean total number of steps taken per day?
-
-
-
-## What is the average daily activity pattern?
-
-
-
-## Imputing missing values
-
-
-
-## Are there differences in activity patterns between weekdays and weekends?
->>>>>>> 80edf39c3bb508fee88e3394542f967dd3fd3270
